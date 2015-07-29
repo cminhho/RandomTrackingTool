@@ -68,7 +68,7 @@ var app = angular.module('RandomTrackingTool', []);
 app.controller('MainCtrl', function($scope, $timeout, $interval) {
   
   var promise;
-  var list = ['Thai', 'Cang', 'Thuy', 'Phuong', 'Tam', 'Nghia', 'Hau', 'Huy', 'Tai', 'Thuy Dang', 'Quynh', 'Toan', 'Tam Huynh', 'Toan Nguyen', 'Nhan', 'Chung', 'Dat', 'Vi', 'Duy']
+  var list = ['Thai', 'Cang', 'a.Thuy', 'Phuong', 'Tam', 'c.Thuy', 'Nghia', 'Hau', 'Huy', 'Tai', 'Thuy Dang', 'Quynh', 'Toan', 'Tam Huynh', 'Toan Nguyen', 'Nhan', 'Chung', 'Dat', 'Vi']
 
   function Person(name, value) {
     this.name = name;
