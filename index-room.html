@@ -23,7 +23,7 @@
 <body ng-controller="MainCtrl">
     <section class="container" data-ng-init="done = false">
         <h2>Random Tracking Tool</h2>
-        <button data-ng-click="start(); done = true">pause</button>
+        <button data-ng-show="!done" data-ng-click="start(); done = true">pause</button>
         <!--<button data-ng-click="init(); done = false">restart</button>-->
         <button data-ng-click="showlog()">show log</button>
         <table>
@@ -38,8 +38,8 @@
                 <tr data-ng-repeat="persion in people">
                     <td data-ng-bind="$index+1">index</td>
                     <td data-ng-bind="persion.name">name</td>
-                    <td >
-						<span data-ng-if="!done">{{persion.value}}</span>
+                    <td>
+						<span data-ng-if="!done" style="color: {{persion.color}}">Room {{persion.value}}</span>
 						<span data-ng-if="done">{{persion.room}}</span>
 					</td>
 

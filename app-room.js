@@ -66,11 +66,12 @@
 })(document);
 var app = angular.module('RandomTrackingTool', []);
 app.controller('MainCtrl', function($scope, $timeout, $interval) {
-  
-  var promise;
-  var list = ['Thai', 'Cang', 'Thuy Hoang', 'Phuong', 'Tam Tit', 'Hau', 'Quynh', 'Toan Gia', 'Tam Ga', 'Chung', 'Dat', 'Vi', 'Quang', 'Truong']
 
-  var room = ['Room 1', 'Room 2', 'Room 3', 'Room 1', 'Room 2', 'Room 3', 'Room 1', 'Room 2', 'Room 3', 'Room 1', 'Room 2', 'Room 3', 'Room 1', 'Room 2']	
+  var promise;
+  var list = ['Thai', 'Cang', 'Thuy Hoang', 'Phuong', 'Tam Tit', 'Hau', 'Quynh', 'Toan Gia', 'Tam Ga', 'Chung', 'Dat', 'Vi', 'Quang', 'Truong'];
+
+  var room = ['Room 1', 'Room 2', 'Room 3', 'Room 1', 'Room 2', 'Room 3', 'Room 1', 'Room 2', 'Room 3', 'Room 1', 'Room 2', 'Room 3', 'Room 1', 'Room 2'];
+
   function Person(name, value) {
     this.name = name;
     this.value = value;
@@ -80,19 +81,28 @@ app.controller('MainCtrl', function($scope, $timeout, $interval) {
   function getNumber(firstNum, lastNum) {
     return Math.floor((Math.random() * lastNum) + firstNum)
   }
-  
+
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   $scope.init = function() {
-  $scope.people = [];
+    $scope.people = [];
     for (var i = 0; i < list.length; i++) {
       var persion = new Person(list[i], 0);
       $scope.people.push(persion);
     }
     var countUp = function() {
-	
-	  for (var i = 0; i < list.length; i++) {
+      for (var i = 0; i < list.length; i++) {
         $scope.people[i].value = getNumber(1, 3);
+        $scope.people[i].color = getRandomColor();
       }
-	  
+
       promise = $timeout(countUp, 50);
     }
     promise = $timeout(countUp, 50);
@@ -100,26 +110,26 @@ app.controller('MainCtrl', function($scope, $timeout, $interval) {
   $scope.init();
   $scope.start = function() {
     $timeout.cancel(promise);
-	
-	function extractRandom(arr) {
-        var index = Math.floor(Math.random() * arr.length);
-        var result = arr[index];
-        // remove item from the array
-        removeItem(arr, index);
-        return(result);
+
+    function extractRandom(arr) {
+      var index = Math.floor(Math.random() * arr.length);
+      var result = arr[index];
+      // remove item from the array
+      removeItem(arr, index);
+      return (result);
     }
-	
-	function removeItem(arr, index) {
-        for (var i = index; i < arr.length - 1; i++) {
-            arr[i] = arr[i + 1];
-        }
-		arr.length = arr.length - 1;
+
+    function removeItem(arr, index) {
+      for (var i = index; i < arr.length - 1; i++) {
+        arr[i] = arr[i + 1];
+      }
+      arr.length = arr.length - 1;
     }
-	
-	for (var i = 0; i < list.length; i++) {
-		$scope.people[i].room = extractRandom(room);
+
+    for (var i = 0; i < list.length; i++) {
+      $scope.people[i].room = extractRandom(room);
     }
-	
+
   };
   $scope.showlog = function() {
     console.table($scope.people)
